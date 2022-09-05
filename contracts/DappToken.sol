@@ -13,7 +13,16 @@ contract DappToken {
 		uint256 _value
 		);
 
+	event Approval(
+		address indexed _owner,
+		address indexed _spender,
+		uint256 _value
+		);
+	
+
 	mapping(address => uint256) public balanceOf; // Mapping adress and balance of tokens
+	mapping(address => mapping(address => uint256)) public allowance; //mapping within mapping -> Account a => Account b => amount of approved tokens
+	
 
 	constructor (uint256 _initialSupply) { // Constructor
 		balanceOf[msg.sender] = _initialSupply; //msg = global variable with data behind it; .sender = adress that calls the function -> current call; Mapping sender & initial supply
@@ -22,7 +31,7 @@ contract DappToken {
 	}
 
 
-	//Transfer-Function
+	//Transfer-Function on own behalft
 	
 	function transfer(address _to, uint256 _value) public returns (bool success) {
 		//Exception if senders-accounts doesn´t have enough Token
@@ -35,5 +44,33 @@ contract DappToken {
 		//return bool
 		return true; // shows that functions ran through
 		
+	}
+
+	//Delegated Transfer on behalf of a third party (i. e. exchange)
+
+	//approve function
+	function approve(address _spender, uint256 _value) public returns(bool success){ //approve an accounts to spend value x
+		// allowance
+		allowance[msg.sender][_spender] = _value;
+
+		//Approval event
+		emit Approval(msg.sender, _spender, _value);
+		return true;
+	}
+	//transferFrom function
+	function transferFrom(address _from, address _to, uint256 _value) public returns (bool success){
+		//require _from has enough tokens
+		require(_value <= balanceOf[_from]);
+		//require allowance is big enough
+		require(_value <= allowance[_from][msg.sender]);
+		//change balance
+		balanceOf[_from] -= _value;
+		balanceOf[_to] += _value;
+		//update allowance
+		allowance[_from][msg.sender] -= _value;
+		//transfer event
+		emit Transfer(_from, _to, _value);
+		//return a boolean
+		return true;
 	}
 }
