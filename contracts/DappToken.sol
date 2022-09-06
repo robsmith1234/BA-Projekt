@@ -1,6 +1,6 @@
 pragma solidity >=0.4.22 <0.9.0;
 
-contract DappToken {
+contract DappToken { // ERC20 SmartContract
 	
 	string public name = "DappToken"; //optional
 	string public symbol = "DAPP"; // optional 
@@ -48,7 +48,7 @@ contract DappToken {
 
 	//Delegated Transfer on behalf of a third party (i. e. exchange)
 
-	//approve function
+	//approve function - needed to empower a third party to spend tokens
 	function approve(address _spender, uint256 _value) public returns(bool success){ //approve an accounts to spend value x
 		// allowance
 		allowance[msg.sender][_spender] = _value;

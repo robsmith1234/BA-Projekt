@@ -1,0 +1,116 @@
+{
+  "contractName": "TokenSale",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.16+commit.07a7930e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/DappTokenSale.sol\":\"TokenSale\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/DappTokenSale.sol\":{\"keccak256\":\"0x27924cae5077652ea420216c88ec8b165c11854f8b61ae810d882c59c7760444\",\"urls\":[\"bzz-raw://38971c0318004ca986e9ab9172cdb118ecc11c389b3452ed6bb1c5233fcd44b4\",\"dweb:/ipfs/QmWNFiNW13Ar58j69qRr6xrFmbEYJNJgYmenyzr1a9z4Jv\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220c2c7f06583c0ac90728641286284b1d7becb8e11b2c58840c988746fe3e9470964736f6c63430008100033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220c2c7f06583c0ac90728641286284b1d7becb8e11b2c58840c988746fe3e9470964736f6c63430008100033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "36:155:1:-:0;;;60:126;;;;;;;;;;36:155;;;;;;",
+  "deployedSourceMap": "36:155:1:-:0;;;;;",
+  "source": "pragma solidity >=0.4.22 <0.9.0;\r\n\r\ncontract TokenSale{\r\n\r\n\tconstructor (){\r\n\t\t//Assign an admin - account with special privilegies\r\n\t\t//Interact with Token Contract\r\n\t\t//Token Price\r\n\t}\r\n\r\n}",
+  "sourcePath": "C:\\Users\\Büro\\Desktop\\bachelorarbeit\\_Ico_project\\token_sale\\contracts\\DappTokenSale.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/DappTokenSale.sol",
+    "exportedSymbols": {
+      "TokenSale": [
+        192
+      ]
+    },
+    "id": 193,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 187,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:1"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "TokenSale",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 192,
+        "linearizedBaseContracts": [
+          192
+        ],
+        "name": "TokenSale",
+        "nameLocation": "45:9:1",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 190,
+              "nodeType": "Block",
+              "src": "74:112:1",
+              "statements": []
+            },
+            "id": 191,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 188,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "72:2:1"
+            },
+            "returnParameters": {
+              "id": 189,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "74:0:1"
+            },
+            "scope": 192,
+            "src": "60:126:1",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 193,
+        "src": "36:155:1",
+        "usedErrors": []
+      }
+    ],
+    "src": "0:191:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.16+commit.07a7930e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.9",
+  "updatedAt": "2022-09-06T17:38:19.680Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
