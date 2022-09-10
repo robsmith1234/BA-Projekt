@@ -6,7 +6,7 @@ contract TokenSale {
     address admin; //not public - don't expose adress of admin
     DappToken public tokenContract;
     uint256 public tokenPrice;
-    uint256 public tokenSold;
+    uint256 public tokensSold;
 
     event Sell(address _buyer, uint256 _amount);
 
@@ -34,7 +34,7 @@ contract TokenSale {
     	require(tokenContract.transfer((msg.sender), _numberOfTokens));
     	
     	// track number tokens sold
-    	tokenSold += _numberOfTokens;
+    	tokensSold += _numberOfTokens;
 
     	// emit sell event
     	emit Sell(msg.sender, _numberOfTokens);
