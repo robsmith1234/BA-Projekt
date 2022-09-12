@@ -6,12 +6,15 @@
 	"directories": {
 		"test": "test"
 	},
-	"scripts":{
+	"scripts": {
 		"dev": "lite-server"
 	},
 	"author": "Robin S.",
 	"license": "ISC",
 	"devDependencies": {
 		"lite-server": "^2.3.0"
+	},
+	"dependencies": {
+		"bootstrap": "^5.2.1"
 	}
 }
