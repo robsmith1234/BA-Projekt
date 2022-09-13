@@ -43,7 +43,7 @@ contract("TokenSale", function(accounts){
 			 assert.equal(receipt.logs[0].event, 'Sell', 'should be the "Sell" event');
 			 assert.equal(receipt.logs[0].args._buyer, buyer, 'logs the account that purchased the tokens');
 			 assert.equal(receipt.logs[0].args._amount, numberOfTokens, 'logs the number of tokens purchased');
-			return tokenSaleInstance.tokenSold();
+			return tokenSaleInstance.tokensSold();
 		}).then(function (amount) {
 			assert.equal(amount.toNumber(), numberOfTokens, "increments the number of tokens sold");
 			return tokenInstance.balanceOf(buyer);
@@ -55,9 +55,9 @@ contract("TokenSale", function(accounts){
 			return tokenSaleInstance.buyTokens(numberOfTokens, {from: buyer, value: 1}); //tries to buy Tokens on a way to low wei-value - catched by require(msg.value == multiply(_numberOfTokens, tokenPrice));
 		}).then(assert.fail).catch(function(error){
 			assert(error.message.toString().indexOf("revert") >=0, "msg.value must equal number of tokens * wei");
-			return tokenSaleInstance.buyTokens(numberOfTokens + 1, {from: buyer, value: numberOfTokens * tokenPrice});
+			return tokenSaleInstance.buyTokens(numberOfTokens+ 1, {from: buyer, value: numberOfTokens * tokenPrice}); // tries to buy more tokens than available - catched by require(tokenContract.transfer((msg.sender), _numberOfTokens));
 		}).then(assert.fail).catch(function(error){
-			assert(error.message.toString().indexOf("revert") >=0, "cannot purchase more tokens than available"); // tries to buy more tokens than available - catched by require(tokenContract.transfer((msg.sender), _numberOfTokens));
+			assert(error.message.toString().indexOf("revert") >=0, "cannot purchase more tokens than available"); 
 		});
 	});
 

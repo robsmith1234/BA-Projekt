@@ -59,7 +59,7 @@ App = {
     })
   },
 
-  render: function() {
+  render: function() { // 
     if (App.loading) {
       return;
     }
@@ -79,7 +79,6 @@ App = {
       }
     })
 
-    // Load token sale contract
     App.contracts.TokenSale.deployed().then(function(instance) {
       TokenSaleInstance = instance;
       return TokenSaleInstance.tokenPrice();
@@ -108,7 +107,7 @@ App = {
     });
   },
 
-  buyTokens: function() {
+  buyTokens: function() { // wird ausgeführt, wenn man im Webinterface auf den "Tokens Kaufen"-Button drückt
     $('#content').hide();
     $('#loader').show();
     var numberOfTokens = $('#numberOfTokens').val();

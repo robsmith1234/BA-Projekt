@@ -1,7 +1,9 @@
 // Initialisere Tokenbereitstellung
+// Start truffle console: truffle console
 TokenSale.deployed().then(function(i){tokenSale=i;}) 	// intialisiere TokenSale
 DappToken.deployed().then(function(i){token=i;})		// initialisiere Token
 tokensAvailable = 750000 								// Angabe: wie viele Tokens sollen bereitgestellt werden
 admin = accounts[0]										// admin-Account (erster Ganache-Account) der Variable admin zuweisen
 token.transfer(tokenSale.address, tokensAvailable, {from: admin}) 	//Tokenfreigabe durch transfer-Methode vom Admin Account aus authorisieren
 token.balanceOf(tokenSale.address)						// Tokenbestand auf Tokensale ausgeben (muss tokensAvailable entsprechen)
+tokenSale.endSale({from: admin})						// Beendigung des Sales und Rücktransfer zu Admin-Konto
