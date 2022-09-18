@@ -1,4 +1,4 @@
-pragma solidity >=0.4.22 <0.9.0;
+pragma solidity ^0.6.12;
 
 import "./DappToken.sol";
 
@@ -11,7 +11,7 @@ contract TokenSale {    // Contract der es ermöglicht Token nach ERC20 zu verka
     event Sell(address _buyer, uint256 _amount); // Sell Event. Dieses wird von der buyTokens-Funktion aufgerufen.
 
 
-  	constructor(DappToken _tokenContract, uint256 _tokenPrice){ // Constructor - wird bei Deployement des Smart-Contracts aufgerufen.
+  	constructor(DappToken _tokenContract, uint256 _tokenPrice)public{ // Constructor - wird bei Deployement des Smart-Contracts aufgerufen.
         admin = msg.sender;                                     // Admin wird festgelegt (=Deployer des SC). Dieser ist nicht öffentlich einsehbar.
         tokenContract = _tokenContract;                         // Token-SC wird referenziert.
         tokenPrice = _tokenPrice;                               // Festlegung Tokenpreis
@@ -23,19 +23,21 @@ contract TokenSale {    // Contract der es ermöglicht Token nach ERC20 zu verka
     }
 
     //buyTokens: Funktionn die es ermöglicht Ether gegen die virtuellen Tokens, welche im TokenSale angeboten werden, einzutauschen
-    function buyTokens(uint256 _numberOfTokens) public payable{ // modifier payable: Ermöglicht es, dass SC Ether senden und empfangen können 
+    function buyTokens(uint256 numberOfTokens) external payable{ // modifier payable: Ermöglicht es, dass SC Ether senden und empfangen können 
     	
-    	require(msg.value == multiply(_numberOfTokens, tokenPrice));        // Prüfung: Enthält die Transaktion genügend Ether. 
-    	require(tokenContract.balanceOf(address(this)) >= _numberOfTokens); // Prüfung: Enthält der TokenSale-SC genügend Tokens, um die Transaktion zu vollziehen
-    	require(tokenContract.transfer((msg.sender), _numberOfTokens));     // Prüfung: Aufruf transfer-Funktion. Bei erfolgreichem Durchlauf gibt diese "true" zurück
+    	require(msg.value == multiply(numberOfTokens, tokenPrice));        // Prüfung: Enthält die Transaktion genügend Ether. 
+    	require(tokenContract.balanceOf(address(this)) >= numberOfTokens); // Prüfung: Enthält der TokenSale-SC genügend Tokens, um die Transaktion zu vollziehen
+    	
     
-    	tokensSold += _numberOfTokens;         // Variable tokensSold wird um die veräußerte Nummer hochgezählt -> wird auf der Verkaufs-Webseite angezeigt
+    	tokensSold += numberOfTokens;         // Variable tokensSold wird um die veräußerte Nummer hochgezählt -> wird auf der Verkaufs-Webseite angezeigt
 
-    	emit Sell(msg.sender, _numberOfTokens);// löst das Sell event aus.   
+    	emit Sell(msg.sender, numberOfTokens);// löst das Sell event aus.   
+
+        require(tokenContract.transfer((msg.sender), numberOfTokens));     // Prüfung: Aufruf transfer-Funktion. Bei erfolgreichem Durchlauf gibt diese "true" zurück + gleichzeitig der external call für den Transfer.
     }
 
     //endSale-function: Über diese Funktion kann der Token-Sale beendet werden.
-    function endSale() public{
+    function endSale() external{
     	require(msg.sender == admin); //Prüfung: Ruft der "admin"-Account die Funktion auf.
     	require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this)))); // Prüfung & Ausführung: Rücktransfer zum "admin"-Account muss erfolgreich verlaufen.
     }

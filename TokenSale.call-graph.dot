@@ -1,0 +1,16 @@
+strict digraph {
+subgraph cluster_321_TokenSale {
+label = "TokenSale"
+"321_multiply" [label="multiply"]
+"321_buyTokens" [label="buyTokens"]
+"321_endSale" [label="endSale"]
+"321_constructor" [label="constructor"]
+"321_buyTokens" -> "321_multiply"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool)" 
+"321_buyTokens" -> "require(bool)"
+"321_multiply" -> "require(bool)"
+"321_endSale" -> "require(bool)"
+}
+}

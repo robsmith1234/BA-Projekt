@@ -1,0 +1,15 @@
+strict digraph {
+subgraph cluster_182_DappToken {
+label = "DappToken"
+"182_approve" [label="approve"]
+"182_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"182_transferFrom" [label="transferFrom"]
+"182_constructor" [label="constructor"]
+"182_transfer" [label="transfer"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool)" 
+"182_transfer" -> "require(bool)"
+"182_transferFrom" -> "require(bool)"
+}
+}
