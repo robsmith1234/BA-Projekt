@@ -17,12 +17,12 @@ contract TokenSale {    // Contract der es ermöglicht Token nach ERC20 zu verka
         tokenPrice = _tokenPrice;                               // Festlegung Tokenpreis
     }
 
-    // multiply-function: "Sichere" Multiplikationsfunktion
+    //multiply-Funktion: "Sichere" Multiplikationsfunktion
     function multiply(uint x, uint y) internal pure returns (uint z){   // internal = diese Funktion kann nicht von "außen" aufgerufen werden und hinterlässt keine Spuren auf der Blockchain.
     	require(y == 0 || (z = x* y) / y == x);                         // prüft, ob ein Overflow provoziert wurde: kein overflow wenn -> x * y = z && z / x = y, 5 * 10 = 50 && 50 / 5 = 10.
     }
 
-    //buyTokens: Funktionn die es ermöglicht Ether gegen die virtuellen Tokens, welche im TokenSale angeboten werden, einzutauschen
+    //buyTokens-Funktion: Funktionn die es ermöglicht Ether gegen die virtuellen Tokens, welche im TokenSale angeboten werden, einzutauschen
     function buyTokens(uint256 numberOfTokens) external payable{ // modifier payable: Ermöglicht es, dass SC Ether senden und empfangen können 
     	
     	require(msg.value == multiply(numberOfTokens, tokenPrice));        // Prüfung: Enthält die Transaktion genügend Ether. 
@@ -35,11 +35,13 @@ contract TokenSale {    // Contract der es ermöglicht Token nach ERC20 zu verka
 
         require(tokenContract.transfer((msg.sender), numberOfTokens));     // Prüfung: Aufruf transfer-Funktion. Bei erfolgreichem Durchlauf gibt diese "true" zurück + gleichzeitig der external call für den Transfer.
     }
+     
 
     //endSale-function: Über diese Funktion kann der Token-Sale beendet werden.
     function endSale() external{
     	require(msg.sender == admin); //Prüfung: Ruft der "admin"-Account die Funktion auf.
     	require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this)))); // Prüfung & Ausführung: Rücktransfer zum "admin"-Account muss erfolgreich verlaufen.
+        require(msg.sender.send(address(this).balance)); //entspricht withdraw-Funktion: Sorgt für Ausleitung des Ether-Guthabens
     }
 
 }

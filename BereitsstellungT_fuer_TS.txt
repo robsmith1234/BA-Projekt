@@ -1,3 +1,5 @@
+// Starte Webseite
+npm dev run
 // Initialisere Tokenbereitstellung
 // Start truffle console: truffle console
 TokenSale.deployed().then(function(i){tokenSale=i;}) 	// intialisiere TokenSale
